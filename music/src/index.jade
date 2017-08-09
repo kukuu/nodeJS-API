@@ -1,0 +1,641 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title REST with Node.js
+
+    // build:css styles/styles.css
+    //- Check out 'src/bower_components/prism/themes/' for available themes
+    link(rel='stylesheet', type='text/css', href='bower_components/prism/themes/prism-tomorrow.css')
+    link(rel='stylesheet', type='text/css', href='styles/main.css')
+    // endbuild
+
+  body
+
+    div#folder-structure
+      h5 Open Files
+      h5 Folders
+      ul noderest
+        li server.js
+        li.package-json package.json 
+        li.node-modules
+          ul node_modules 
+            li express
+        li.routes-js routes.js
+        li.controllers
+          ul controllers
+            li musicians.js
+        li.models
+          ul models
+            li musician.js
+
+    div#terminal
+      ul#terminal-list
+        
+
+
+
+    article
+
+      section(data-bespoke-state='title')
+        h1 REST with Node.js
+
+      section(data-bespoke-state='intro')
+        h2 Mental Map
+        h3 REST + Node.js?
+
+      section(data-bespoke-state='intro')
+        h2 REST + PHP
+        ul
+          li.bullet 
+          li.bullet Apache
+          li.bullet .php controllers
+          li.bullet .htaccess pretty urls
+          li.bullet Content-Type JSON Headers
+          li.bullet MySQLi 
+
+      section(data-bespoke-state='intro')
+        h2 REST + Nodejs
+        ul
+          li.bullet 
+          li.bullet Node.js
+          li.bullet Express
+          li.bullet JavaScript modules
+          li.bullet Routes
+          li.bullet Mongo
+
+      section(data-bespoke-state='node')
+        h2 Node.js
+        h3 server.js
+        hr
+        pre
+          code.language-javascript.
+            var http = require('http');
+            http.createServer(function (req, res) {
+              res.writeHead(200, {'Content-Type': 'text/plain'});
+              res.end('Hello New York\n');
+            }).listen(3001, '127.0.0.1');
+            console.log('Server running at http://127.0.0.1:3001/');
+
+      section#npm-install(data-bespoke-state='node')
+        h2 Node.js 
+        h3 Terminal command
+        hr
+        pre
+          code.language-javascript.
+            $ cd noderest/
+            $ node server.js
+        ul.for-terminal
+          li $ cd noderest/
+          li $ node server.js
+
+      section#npm-install(data-bespoke-state='node')
+        h2 Node.js 
+        h3 start node
+        ul.for-terminal
+          li Server running at http://127.0.0.1:3001/
+
+      section(data-bespoke-state='node')
+        h2 Node.js
+        h3 server started
+        hr
+        img(src="img/browser-node.gif",height="282",width="394")
+
+      section#package-json(data-bespoke-state='express')
+        h2 Add Dependencies
+        h3 Express: App Framework for Node
+        h3 package.json
+        hr
+        pre
+          code.language-javascript.
+            {
+                "name": "Node REST Demo",
+                "description": "Demo REST API with Node",
+                "version": "0.0.1",
+                "private": true,
+                "dependencies": {
+                    "express": "3.x"
+                }
+            }
+
+      section(data-bespoke-state='express')
+        h2 Install Dependencies
+        h3 Express is only dependency
+        hr
+        pre
+          code.language-javascript.
+            $ npm install
+        ul.for-terminal
+          li $ npm install
+
+      section(data-bespoke-state='express')
+        h2 Express
+        h3 installing
+        ul.for-terminal
+          li 
+            span.synt-hi-node npm
+            &nbsp;
+            span.synt-hi-http http
+            &nbsp;
+            span.synt-hi-prot GET 
+            span https://registry.npmjs.org/express
+          li 
+            span.synt-hi-node npm
+            &nbsp;
+            span.synt-hi-http http
+            &nbsp;
+            span.synt-hi-prot 200 
+            span https://registry.npmjs.org/express
+          li express@3.5.2 node_modules/express
+          li ├── methods@0.1.0
+          li ├── merge-descriptors@0.0.2
+          li ├── cookie@0.1.2
+          li ├── cookie-signature@1.0.3
+          li ├── range-parser@1.0.0
+          li ├── debug@0.8.1
+          li ├── fresh@0.2.2
+          li ├── buffer-crc32@0.2.1
+          li ├── mkdirp@0.4.0
+          li ├── commander@1.3.2 (keypress@0.1.0)
+          li ├── send@0.3.0 (debug@0.8.0, mime@1.2.11)
+          li └── connect@2.14.5 (response-time@1.0.0, pause@0.0.1, connect-timeout@1.0.0, method-override@1.0.0, qs@0.6.6, basic-auth-connect@1.0.0, vhost@1.0.0, bytes@0.3.0, raw-body@1.1.4, static-favicon@1.0.2, errorhandler@1.0.0, setimmediate@1.0.1, serve-static@1.1.0, morgan@1.0.0, csurf@1.1.0, cookie-parser@1.0.1, compression@1.0.0, express-session@1.0.2, serve-index@1.0.1, multiparty@2.2.0)
+          li $
+
+      section(data-bespoke-state='express')
+        h2 Add Express
+        h3 server.js
+        hr
+        pre
+          code.language-javascript.
+            var express = require('express');
+ 
+            var app = express();
+             
+            app.get('/', function(req, res) {
+                res.send('Hello Seattle\n');
+            });
+
+            app.listen(3001);
+            console.log('Listening on port 3001...');
+
+      section(data-bespoke-state='express')
+        h2 Express
+        h3 restart Node with Express
+        pre 
+          code.language-javascript.
+            CTRL+C
+        ul.for-terminal
+          li $
+          li $ node server.js
+          li Listening on port 3001... 
+
+      section(data-bespoke-state='express')
+        h2 Node and Express
+        h3 serving different headers
+        img(src="img/browser-express.gif",height="282",width="394")
+
+      section(data-bespoke-state='express')
+        h2 Routes
+        hr
+        pre
+          code.language-javascript.
+            app.get('/path', function(req, res) {
+                res.send('Return JSON or HTML View');
+            });
+
+      section(data-bespoke-state='express')
+        h2 Request
+        h3 req
+        hr
+        pre
+          code.language-javascript.
+            app.get('/musician/:name', function(req, res) {
+
+                // Get /musician/Matt
+                console.log(req.params.name)
+                // => Matt
+
+                res.send('{"id": 1,"name":"Matt", 
+                  "band":"BBQ Brawlers"}');
+            });
+
+      section(data-bespoke-state='express')
+        h2 Response
+        h3 res
+        hr
+        pre
+          code.language-javascript.
+            res.send({ some: 'json' });
+            res.send("html for Maximum Pain's web page");
+            res.send(404, 'No musicians here');
+            res.send(500, { error: 'you blew it' });
+            res.send(200);
+
+      section(data-bespoke-state='express')
+        h2 HTTP verbs
+        h3 routes.js
+        hr
+        pre
+          code.language-javascript.
+            module.exports = function(app){
+              var musicians = require('./controllers/musicians');
+
+              app.get('/musicians', musicians.findAll);
+              app.get('/musicians/:id', musicians.findById);
+              app.post('/musicians', musicians.add);
+              app.put('/musicians/:id', musicians.update);
+              app.delete('/musicians/:id', musicians.delete);
+            }
+
+      section(data-bespoke-state='express')
+        h2 JS Modules
+        h3 controllers/musicians.js
+        hr
+        pre
+          code.language-javascript.
+            exports.findAll = function(req, res){
+              res.send([{
+                "id": 1,
+                "name": "Max",
+                "band": "Maximum Pain",
+                "instrument": "guitar"
+              }]);
+            };
+
+      section(data-bespoke-state='express')
+        h2 Import Routes and JS Modules
+        h3 server.js
+        hr
+        pre
+          code.language-javascript.
+            var express = require('express');
+ 
+            var app = express();             
+            
+            require('routes')(app);
+
+            app.listen(3001);
+            console.log("Jammin\' on port 3001...");
+
+      section(data-bespoke-state='express')
+        h2 Node.js
+        h3 restart node server
+        pre 
+          code.language-javascript.
+            CTRL+C
+        ul.for-terminal
+          li $
+          li $ node server.js
+          li Jammin' on port 3001... 
+
+      section(data-bespoke-state='express')
+        h2 REST GET
+        h3 /musicians
+        img(src="img/browser-musicians.gif",height="282",width="394")
+
+      section(data-bespoke-state='express')
+        h2 Mongo DB
+        h3 controllers/musicians.js
+        hr
+        pre
+          code.language-javascript.
+            var mongoose = require('mongoose'),
+            Musician = mongoose.model('Musician');
+          
+            exports.findAll = function(req, res){
+              Musician.find({},function(err, results) {
+                return res.send(results);
+              });
+            };
+
+      section(data-bespoke-state='mongo')
+        h2 MongoDB
+        h3 start mongo
+        hr
+        pre
+          code.language-javascript.
+            $ mongod
+        ul.for-terminal 
+          li $ mongod
+          li &nbsp;
+
+      section(data-bespoke-state='mongo')
+        h2 Mongoose.js
+        h3 install Mongo Node model framework
+        hr
+        pre
+          code.language-javascript.
+            $ npm install mongoose --save-dev
+        ul.for-terminal 
+          li $ npm install mongoose --save-dev
+
+      section(data-bespoke-state='mongo')
+        h2 Mongoose.js
+        h3 installing
+        ul.for-terminal 
+          li 
+            span.synt-hi-node npm
+            &nbsp;
+            span.synt-hi-http http
+            &nbsp;
+            span.synt-hi-prot GET 
+            span https://registry.npmjs.org/mongoose
+          li 
+            span.synt-hi-node npm
+            &nbsp;
+            span.synt-hi-http http
+            &nbsp;
+            span.synt-hi-prot 200 
+            span https://registry.npmjs.org/mongoose
+          li > kerberos@0.0.3 install /Applications/MAMP/htdocs/noderest_project/node_modules/mongoose/node_modules/mongodb/node_modules/kerberos
+          li > (node-gyp rebuild 2> builderror.log) || (exit 0)
+          li 
+          li CXX(target) Release/obj.target/kerberos/lib/kerberos.o
+          li SOLINK_MODULE(target) Release/bson.node: Finished
+          li mongoose@3.8.8 node_modules/mongoose
+          li ├── regexp-clone@0.0.1
+          li ├── muri@0.3.1
+          li ├── sliced@0.0.5
+          li ├── hooks@0.2.1
+          li ├── mpath@0.1.1
+          li ├── mpromise@0.4.3
+          li ├── ms@0.1.0
+          li ├── mquery@0.5.3 (debug@0.7.4)
+          li └── mongodb@1.3.23 (kerberos@0.0.3, bson@0.2.5)
+          li $
+
+      section(data-bespoke-state='mongo')
+        h2 Update Server
+        h3 server.js
+        pre 
+          code.language-javascript.
+            var express = require('express'),
+            mongoose = require('mongoose'),
+            fs = require('fs');
+           
+            var mongoUri = 'mongodb://localhost/noderest_project'; 
+            mongoose.connect(mongoUri);
+            var db = mongoose.connection;
+            db.on('error', function () {
+              throw new Error('unable to connect to database at ' + mongoUri);
+            });
+
+            var app = express();
+
+            app.configure(function(){
+              app.use(express.bodyParser());
+            });
+             
+            require('./models/musicians')
+            require('./routes')(app);
+
+            app.listen(3001);
+            console.log('Listening on port 3001...');
+
+      section(data-bespoke-state='mongo')
+        h2 Model Schema
+        h3 models/musician.js
+        pre 
+          code.language-javascript.
+            var mongoose = require('mongoose'),
+            Schema = mongoose.Schema;
+
+            var MusicianSchema = new Schema({
+              name: String,
+              band: String,
+              instrument: String
+            });
+
+            mongoose.model('Musician', MusicianSchema);
+
+      section(data-bespoke-state='mongo')
+        h2 Mongo
+        h3 restart Node with Mongo
+        pre 
+          code.language-javascript.
+            CTRL+C
+        ul.for-terminal 
+          li $ node server.js
+          li Listening on port 3001...
+
+      section(data-bespoke-state='mongo')
+        h2 REST GET
+        h3 /musicians
+        img(src="img/browser-no-musicians.gif",height="282",width="394")
+
+      section(data-bespoke-state='mongo')
+        h2 Mongo Data Import
+        h3 add route to routes.js
+        pre 
+          code.language-javascript.
+            app.get('/import', musicians.import);  
+
+      section(data-bespoke-state='mongo')
+        h2 Mongo Data Import
+        h3 add method to controller/musicians.js
+        pre 
+          code.language-javascript.            
+            exports.import = function(req, res){
+              Musician.create(
+                { "name": "Ben", "band": "DJ Code Red", "instrument": "Reason" },
+                { "name": "Mike D.","band": "Kingston Kats", "instrument": "drums" },
+                { "name": "Eric", "band": "Eric", "instrument": "piano" },
+                { "name": "Paul", "band": "The Eyeliner", "instrument": "guitar" }   
+              , function (err) {                
+                if (err) return console.log(err); 
+                return res.send(202);
+              });
+            };
+
+      section(data-bespoke-state='mongo')
+        h2 Node.js
+        h3 restart node server
+        pre 
+          code.language-javascript.
+            CTRL+C
+        ul.for-terminal 
+          li $ node server.js
+          li Listening on port 3001...
+
+      section(data-bespoke-state='mongo')
+        h2 Run Import
+        h3 /import
+        img(src="img/browser-import.gif",height="282",width="394")
+
+      section(data-bespoke-state='mongo')
+        h2 Data Imported
+        h3 /musicians
+        img(src="img/browser-data.gif",height="282",width="394")
+
+      section(data-bespoke-state='mongo')
+        h2 Route GET to findAll
+        h3 app.get('/musicians', musicians.findAll); 
+        hr
+        pre
+          code.language-javascript.
+            exports.findAll = function(req, res){
+              Musician.find({},function(err, results) {
+                return res.send(results);
+              });
+            };    
+
+      section(data-bespoke-state='mongo')
+        h2 Route GET to findById
+        h3 app.get('/musicians/:id', musicians.findById);
+        hr
+        pre
+          code.language-javascript.
+            exports.findById = function(req, res){
+              var id = req.params.id;
+              Musician.findOne({'_id':id},function(err, result) {
+                return res.send(result);
+              });
+            };
+
+      section(data-bespoke-state='mongo')
+        h2 GET by Id
+        h3 /musicians/:id
+        img(src="img/browser-by-id.gif",height="282",width="394")  
+
+      section(data-bespoke-state='mongo')
+        h2 Route PUT to update
+        h3 app.put('/musicians/:id', musicians.update);
+        hr
+        pre
+          code.language-javascript.
+            exports.update = function(req, res) {
+              var id = req.params.id;
+              var updates = req.body;
+
+              Musician.update({'_id':id}, req.body, 
+                function (err, numberAffected) {
+                  if (err) return console.log(err);
+                  console.log('Updated %d musicians', numberAffected);
+              });
+            }   
+
+      section(data-bespoke-state='mongo')
+        h2 PUT
+        h3 use cURL to test
+        hr
+        pre 
+          code.language-javascript.
+            $ curl -i -X PUT -H 'Content-Type: application/json' 
+              -d '{"band": "BBQ Brawlers"}' 
+              http://localhost:3001/musicians/535fe13ac688500000c2b28b
+        ul.for-terminal 
+          li curl -i -X PUT -H 'Content-Type: application/json' -d '{"instrument": "voice"}' http://localhost:3001/musicians/535ea3fc29b5c50000c685db
+          li HTTP/1.1 200 OK
+          li X-Powered-By: Express
+          li Content-Type: application/json; charset=utf-8
+          li Content-Length: 88
+          li Date: Mon, 28 Apr 2014 22:27:04 GMT
+          li Connection: keep-alive
+          li &nbsp;
+          li {
+          li    "updatedExisting": true,
+          li    "n": 1,
+          li    "connectionId": 330,
+          li    "err": null,
+          li    "ok": 1
+          li  }
+          li Updated 1 musicians
+          li $ 
+
+      section(data-bespoke-state='mongo')
+        h2 Updated
+        h3 /musicians/:id
+        img(src="img/browser-put.gif",height="282",width="394") 
+
+      section(data-bespoke-state='mongo')
+        h2 Route POST to add
+        h3 app.post('/musicians', musicians.add);
+        hr
+        pre
+          code.language-javascript.
+            exports.add = function(req, res) {
+              Musician.create(req.body, function (err, musician) {
+                if (err) return console.log(err); 
+                return res.send(musician);
+              });
+            }   
+
+      section(data-bespoke-state='mongo')
+        h2 POST
+        h3 use cURL to test
+        hr
+        pre 
+          code.language-javascript.
+            $ curl -i -X POST -H 'Content-Type: application/json' -d 
+              '{"name": "Joe", "band": "Abita Boys",
+              "instrument":"voice"}' 
+              http://localhost:3001/musicians 
+        ul.for-terminal 
+          li curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "Joe", "band": "Abita Boys", "instrument":"voice"}' http://localhost:3001/musicians 
+
+      section(data-bespoke-state='mongo')
+        h2 Added
+        h3 /musicians
+        img(src="img/browser-post.gif",height="282",width="394")   
+      
+      section(data-bespoke-state='mongo')
+        h2 Route DELETE to delete
+        h3 app.delete('/musicians/:id', musicians.delete);
+        hr
+        pre
+          code.language-javascript.
+            exports.delete = function(req, res){
+              var id = req.params.id;
+              Musician.remove({'_id':id},function(result) {
+                return res.send(result);
+              });
+            };
+      
+      section(data-bespoke-state='mongo')
+        h2 DELETE
+        h3 use cURL to test
+        hr
+        pre 
+          code.language-javascript.
+            $ curl -i -X DELETE 
+              http://localhost:3001/musicians/535feac1cc539500000a209f
+        ul.for-terminal
+          li curl -i -X DELETE http://localhost:3001/musicians/535fe565c688500000c2b28d
+          li HTTP/1.1 200 OK
+          li X-Powered-By: Express
+          li Content-Length: 0
+          li Date: Tue, 29 Apr 2014 18:10:25 GMT
+          li Connection: keep-alive
+
+          
+      section(data-bespoke-state='mongo')
+        h2 Deleted
+        h3 /musicians
+        img(src="img/browser-delete.gif",height="282",width="394")  
+
+      section(data-bespoke-state='title')
+        h2 Thanks
+
+      section(data-bespoke-state='title')
+        h2 Reference
+        a(href="http://expressjs.com/4x/api.html") Express API Reference
+        a(href="http://mongoosejs.com/docs/api.html") Mongoose.js API docs
+        a(href="http://coenraets.org/blog/2012/10/creating-a-rest-api-using-node-js-express-and-mongodb/") Creating a REST API using Node.js, Express, and MongoDB
+        a(href="https://github.com/markdalgleish/bespoke.js") Bespoke.js
+       
+
+    script(src="//use.typekit.net/eag8wad.js")
+    // build:js scripts/scripts.js
+    script(src='bower_components/bespoke.js/dist/bespoke.min.js')
+    script(src='bower_components/bespoke-keys/dist/bespoke-keys.min.js')
+    script(src='bower_components/bespoke-touch/dist/bespoke-touch.min.js')
+    script(src='bower_components/bespoke-bullets/dist/bespoke-bullets.min.js')
+    script(src='bower_components/bespoke-scale/dist/bespoke-scale.min.js')
+    script(src='bower_components/bespoke-hash/dist/bespoke-hash.min.js')
+    script(src='bower_components/bespoke-progress/dist/bespoke-progress.min.js')
+    script(src='bower_components/bespoke-state/dist/bespoke-state.min.js')
+    script(src='bower_components/bespoke-forms/dist/bespoke-forms.min.js')
+    script(src='bower_components/prism/prism.js')
+    script(src='scripts/main.js')
+    // endbuild

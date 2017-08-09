@@ -1,0 +1,320 @@
+@import 'nib' // CSS3 extensions for Stylus: http://visionmedia.github.io/nib/
+
+// variables!
+
+slide_width = 640px
+slide_height = 480px
+slide_background = #eaeaea
+slide_bg_green = #83e356
+slide_bg_purple = #a57aeb
+slide_bg_violet = #b594eb
+slide_bg_violet2 = #c4abeb
+slide_bg_blue = #9fd3f5
+
+slide_transition_length = .6s
+slide_transition_easing = ease
+slide_transition_rotate_y = 90deg
+// Safari bugs out on 3d transform-origins, so we have to fake it
+slide_transition_nudge_x = -100px
+
+bullet_transition_length = .3s
+bullet_transition_easing = ease
+bullet_transition_translate_x = 16px
+
+// base
+
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+@media print
+  *
+    -webkit-print-color-adjust: exact
+
+@page
+  size: landscape
+  margin: 0
+
+// bespoke.js layout styles
+
+article
+  transition: background slide_transition_length slide_transition_easing
+  display: none
+  &.bespoke-parent
+    transition: width 0.3s
+    display: block
+    position: absolute
+    top: 0
+    bottom: 0
+    width: 100%
+    right: 0
+    overflow: hidden
+    @media print
+      overflow: visible
+      position: static
+    perspective: 600px
+
+.bespoke-slide
+  transition:
+    transform slide_transition_length slide_transition_easing,
+    opacity slide_transition_length slide_transition_easing,
+    background slide_transition_length slide_transition_easing
+  transform-origin: 50% 50% 0
+  backface-visibility: hidden
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+  width: slide_width
+  height: slide_height
+  position: absolute
+  top: 50%
+  margin-top: (slide_height / 2) * -1
+  left: 50%
+  margin-left: (slide_width / 2) * -1
+  background: slide_bg_green
+  padding: 40px
+  border-radius: 0
+  @media print
+    zoom: 1 !important // disable bespoke-scale
+    height: 743px // seems to correspond with an A4, landscape page height
+    width: 100%
+    page-break-before: always
+    position: static
+    margin: 0
+
+.bespoke-before
+  transform: translateX(slide_transition_nudge_x * -1) translateX(slide_width / -2) rotateY(slide_transition_rotate_y * -1) translateX(slide_width / -2)
+
+.bespoke-after
+  transform: translateX(slide_transition_nudge_x) translateX(slide_width / 2) rotateY(slide_transition_rotate_y) translateX(slide_width / 2)
+  @media print
+    transform: none
+
+.bespoke-inactive
+  opacity: 0
+  pointer-events: none
+  @media print
+    opacity 1
+
+.bespoke-active
+  opacity: 1
+
+// bespoke-bullet styles
+
+.bespoke-bullet
+  transition: all bullet_transition_length bullet_transition_easing
+
+.bespoke-bullet-inactive
+  opacity: 0
+  li&
+    transform: translateX(bullet_transition_translate_x)
+  @media print
+    opacity: 1
+
+.bespoke-bullet-active
+  opacity: 1
+
+// bespoke-scale styles
+
+.bespoke-scale-parent
+  perspective: 600px
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  @media print
+    transform: none !important
+
+// bespoke-progress styles
+
+.bespoke-progress-parent
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  height: 8px
+  @media only screen and (min-width: 1366px)
+    height: 12px
+  @media print
+    display: none
+
+.bespoke-progress-bar
+  transition: width .6s ease
+  position: absolute
+  height: 100%
+  background: #6bc1fa
+  border-radius: 0 4px 4px 0
+
+// bespoke-state styles
+
+.title,
+.title .bespoke-slide
+  background: slide_bg_blue
+  
+.node,
+.node .bespoke-slide
+  background: slide_bg_purple
+  
+.express,
+.express .bespoke-slide
+  background: slide_bg_violet
+
+.mongo,
+.mongo .bespoke-slide
+  background: slide_bg_violet2
+
+.server,
+.server .bespoke-slide
+  background: slide_bg_blue
+  
+.intro,
+.server .bespoke-intro
+  background: slide_bg_green
+
+// folder styles
+#folder-structure,
+#terminal  
+  position: absolute
+  text-shadow: 0px 1px 1px white
+  color: #000
+  box-sizing: border-box;
+  h5 
+    color: #aaa
+    font-size: 14px
+    margin-bottom: 8px
+    text-transform: uppercase;
+  ul 
+  li 
+    transition: opacity 0.3s, transform 0.3s
+    margin: 7px 20px
+    
+.for-terminal 
+  display:none
+
+#folder-structure
+  transition: width 0.3s
+  background: #e6e6e6
+  height: 100%
+  width: 0
+  font-size: 16px
+  white-space: nowrap
+  padding: 10px;
+  font-family: arial
+
+.node-modules, 
+.package-json,
+.routes-js,
+.controllers,
+.models
+  transform: translateX(120%)
+  opacity: 0
+
+[class^="folders-open"] #folder-structure 
+  width: 20%
+
+[class^="folders-open"] .bespoke-parent 
+  width: 80%
+
+.folders-open-2 .package-json,
+.folders-open-3 .package-json,
+.folders-open-3 .node-modules, 
+.folders-open-4 .package-json,
+.folders-open-4 .node-modules,
+.folders-open-4 .routes-js,
+.folders-open-5 .package-json,
+.folders-open-5 .node-modules,
+.folders-open-5 .routes-js,
+.folders-open-5 .controllers,
+.folders-open-6 .package-json,
+.folders-open-6 .node-modules,
+.folders-open-6 .routes-js,
+.folders-open-6 .controllers,
+.folders-open-6 .models
+    transform: translateX(0%)
+    opacity: 1
+
+#terminal 
+  transition: height 0.3s, padding 0.3s
+  width: 20%
+  height: 0%
+  background: #fff
+  bottom: 0
+  color: #000
+  text-shadow: none
+  font-family: menlo, courier
+  font-size: 13px
+  overflow: scroll
+  li 
+    margin: 0
+
+.show-term#terminal 
+  height: 50%
+  padding: 10px;
+
+.synt-hi-node,
+.synt-hi-http 
+  background: #000
+
+.synt-hi-node
+  color: #bfbfbf
+
+.synt-hi-http
+  color: #00a631
+
+.synt-hi-prot
+  color: #d63ccb
+
+// prism styles
+
+pre
+  padding: 26px !important
+  border-radius: 8px
+
+// content styles
+
+body
+  font-family: "museo-sans", helvetica, arial, sans-serif
+  font-size: 18px
+  color: #fff;
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.2);
+  transition: opacity 0.3s
+  opacity: 0
+  background: slide_bg_blue
+
+h1
+  font-size: 72px
+  line-height: 82px
+  letter-spacing: -2px
+  margin-bottom: 16px
+
+h2
+  font-size: 42px
+  letter-spacing: -1px
+  margin-bottom: 8px
+
+h3
+  font-size: 24px
+  font-weight: normal
+  margin-bottom: 24px
+
+hr
+  visibility: hidden
+  height: 20px
+
+ul
+  list-style: none
+
+li
+  margin-bottom: 12px
+
+p
+  margin: 0 100px 12px
+  line-height: 22px
+
+a
+  color: #0089f3
+  text-decoration: none
