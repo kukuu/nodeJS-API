@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>WebSockets from the Client - Alexander Adu-Sarkodie</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="page-wrapper">
+		<h1>WebSockets - from the Client</h1>
+
+		<div id="status">Connecting to the server! Please wait...</div>
+
+		<ul id="messages"></ul>
+
+		<form id="message-form" action="#" method="post">
+			<textarea id="message" placeholder="Write your message here..." required></textarea>
+			<button type="submit">Please Send Message</button>
+			<button type="button" id="close">Please Close Connection</button>
+		</form>
+	</div>
+	<!--Websocket script-->
+	<script src="app.js"></script>
+</body>
+</html>

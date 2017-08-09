@@ -1,0 +1,9 @@
+# JavaScript Node JS Architecture 
+
+## Notes: 
+	▪	
+	▪	NodeJS : For the server side. We will use Socket.IO to manage long-terms real-time connection.
+	▪	Google Chrome Extension : For the client side. WebSocket, Notification and Local Storage will be used.
+	▪	MongoDB : To store the datas.
+
+To illustrate our architecture, we are going to create a Node application that will track tweets about the “What’s Next” event and broadcast them in real time to the clients. The client will be a Google Chrome browser extension and will use two features of the HTML5 specification to display the tweets broadcasted by the server. Next feature will include integration with  MongoDB database. We will use it to store tweets and provide statistics when the event ends.
