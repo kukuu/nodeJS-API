@@ -10,6 +10,7 @@ var http = require('http').Server(app);
 
 CB.CloudApp.init('Your App ID', 'Your App Key');
 
+//Instantiate cloudboost
 var cache = new CB.CloudCache('SampleCache');
 
 app.get('/item/:key', function(req,res) {
