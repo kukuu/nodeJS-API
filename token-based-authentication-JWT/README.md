@@ -48,10 +48,15 @@ We'll build a quick API using Node and Express and we'll be using POSTman to tes
 ## File Structure
 
 - app/
+
 ----- models/
+
 ---------- user.js
+
 - config.js
+
 - package.json
+
 - server.js
 
 
@@ -167,7 +172,7 @@ i. Grab All the Packages This will include the packages we installed earlier (ex
 
 ii. Configure Our Application We will set our important variables, configure our packages, and connect to our database here.
 
-iii. Create Basic Routes These are the unprotected routes like the home page (http://localhost:8080). We'll also create a /setup route here so that we can create a sample user in our new database.
+iii. Create Basic Routes These are the unprotected routes like the home page (http://localhost:8080). We'll also create a /setup route here so that we can create a sample user in our new database. For initial test purposes we create a test-user in the server.js. This should be saved to the db
 
 
 B.
