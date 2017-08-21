@@ -1,6 +1,6 @@
 module.exports = {
 
-	'secret': 'ilovescotchyscotch',
-	'database': 'mongodb://noder:noderauth@proximus.modulusmongo.net:27017/so9pojyN'
+	'secret': 'ihoneylovesxxx!90',
+	'database': 'mongodb://127.0.0.1:27017/users'
 
 };
