@@ -90,7 +90,8 @@ Here's that route. Just add it to the routes section of our server.js:
 
 app.get('/setup', function(req, res) {
 
-  // create a sample user
+  // create a sample user. Note, this is just for internal testing. the record and hashing should be extended into the model
+  //and passed to the mongoDB
   var nick = new User({ 
     name: 'Nick Cerminara', 
     password: 'password',
