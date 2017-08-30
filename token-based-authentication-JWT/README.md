@@ -152,13 +152,14 @@ module.exports = mongoose.model('User', new Schema({
  This is where we can store different variables and configuration for our application. For this file, you will need to create MongoDB database.
 
 ```
-
 module.exports = {
 
     'secret': 'ilovesJS',
     'database': 'mongodb://noder:noderauth&54;proximus.modulusmongo.net:27017/so9pojyN'
 
 };
+
+```
 
 i. secret: used when we create and verify JSON Web Tokens
 
